@@ -1,40 +1,37 @@
-const headerObj = { // HeaderObj objektum létrehozása
-    harcMegnevezese: "Harc megnevezése", // headerObj harcMegnevezese tulajdonságának értékadása
-    szembenalloFelek: "Szembenálló felek", // headerObj szembenalloFelek tulajdonságának értékadása
-    hadero: "Haderő" // headerObj hadero tulajdonságának értékadása
-};
-
-const firstRowElement = { // firstRowElement objektum létrehozása
-    harcMegnevezese: "Rákóczi szabadságharc", // harc megnevezése
-    szembenalloFelek1: "Kuruc", // első szembenálló fél
-    hadero1: "70.000", // első szembenálló fél haderője
-    szembenalloFelek2: "Labanc", // második szembenálló fél
-    hadero2: "60.000" // második szembenálló fél haderője
-};
-
-const secondRowElement = { // secondRowElement objektum létrehozása
-    harcMegnevezese: "48-as szabadságharc", // harc megnevezése
-    szembenalloFelek1: "Osztrák császárság (+ Orosz birodalom)", // első szembenálló fél
-    hadero1: "170.000 (+ 200.000)", // első szembenálló fél haderője
-    szembenalloFelek2: "Magyar királyság", // második szembenálló fél
-    hadero2: "170.000" // második szembenálló fél haderője
-};
-
-const thirdRowElement = { // thirdRowElement objektum létrehozása
-    harcMegnevezese: "I. világháború", // harc megnevezése
-    szembenalloFelek1: "Antant", // első szembenálló fél
-    hadero1: "43 millió", // első szembenálló fél haderője
-    szembenalloFelek2: "Központi hatalmak", // második szembenálló fél
-    hadero2: "25 millió" // második szembenálló fél haderője
-};
-
-const fourthRowElement = { // fourthRowElement objektum létrehozása
-    harcMegnevezese: "Bosworthi csata", // harc megnevezése
-    szembenalloFelek: "Angolok (York + Lancester)", // szembenálló felek
-    hadero: "15.000" // haderő
-};
-
-
+let array = [//itt hozom létre az array tömböt minden értékadásnál egy string típusú értéket adok meg az éppen aktuális tulajdonságnak
+    //a számolás az arrayen belül 0-ról indulnak szóval ebben az eseben a fejlécet így tudom majd meghívni: array[0].aktualis elem
+    {//első sor az objektum fejléce (headerObj)
+        harcMegnevezese: "Harc megnevezése", //fejléc mezője a harc megnevezésére
+        szembenalloFelek: "Szembenálló felek", //fejléc mezője a szembenálló felekhez
+        hadero: "Haderő" // fejléc mezője a haderőhöz
+    },
+    {//második sor az első harc adatai (firstRowElement)
+        harcMegnevezese: "Rákóczi szabadságharc", // harc megnevezése
+        szembenalloFelek1: "Kuruc", //első szembenálló fél
+        hadero1: "70.000", // első szembenálló fél haderője
+        szembenalloFelek2: "Labanc", //második szembenálló fél
+        hadero2: "60.000" // második szembenálló fél haderője
+    },
+    {//harmadik sor a második harc adatai (secondRowElement)
+        harcMegnevezese: "48-as szabadságharc", //harc megnevezése
+        szembenalloFelek1: "Osztrák császárság (+ Orosz birodalom)", //első szembenálló fél
+        hadero1: "170.000 (+ 200.000)", //első szembenálló fél haderője
+        szembenalloFelek2: "Magyar királyság", //második szembenálló fél
+        hadero2: "170.000" //második szembenálló fél haderője
+    },
+    {//negyedik sor a harmadik harc adatai (thirdRowElement)
+        harcMegnevezese: "I. világháború",//harc megnevezése
+        szembenalloFelek1: "Antant", //első szembenálló fél
+        hadero1: "43 millió", //első szembenálló fél haderője
+        szembenalloFelek2: "Központi hatalmak", //második szembenálló fél
+        hadero2: "25 millió" //második szembenálló fél haderője
+    },
+    {//ötödik sor a negyedik harc adatai (fourthRowElement)
+        harcMegnevezese: "Bosworthi csata", //harc megnevezése
+        szembenalloFelek: "Angolok (York + Lancester)", //szembenálló felek
+        hadero: "15.000" //haderő
+    }
+];
 
 //Itt hozzuk létre a táblázatot
 const table = document.createElement('table');//létrehozok egy table elemet, ami majd a tablazatomat fogja tartalmazni
@@ -69,17 +66,17 @@ thead.appendChild(headerRow);//hozzadaom a theadre
 
 //Az első cella létrehozása a fejléc sorában
 const headerCell = document.createElement('th');//itt egy th elemet hozok letre
-headerCell.innerHTML = headerObj.harcMegnevezese;//a cellaban a headerObj harcMegnevezese tulajdonsaganak lesz megjelenitve az erteke
+headerCell.innerHTML = array[0].harcMegnevezese;//a cellaban az array 0.tagjanak a harcMegnevezese tulajdonsaganak az erteke lesz megjelenitve 
 headerRow.appendChild(headerCell);//a headerRow-hoz (fejléc sorához) adom hozzá
 
 //A második cella létrehozása a fejléc sorában
 const headerCell2 = document.createElement('th');//itt egy th elemet hozok letre
-headerCell2.innerHTML = headerObj.szembenalloFelek;//a cellaban a headerObj szembenalloFelek tulajdonsaganak lesz megjelenitve az erteke
+headerCell2.innerHTML = array[0].szembenalloFelek;//a cellaban az array 0.tagjanak a szembenalloFelek tulajdonsaganak az erteke lesz megjelenitve 
 headerRow.appendChild(headerCell2);//a headerRow-hoz (fejléc sorához) adom hozzá
 
 //A harmadik cella létrehozása a fejléc sorában
 const headerCell3 = document.createElement('th');//itt egy th elemet hozok letre
-headerCell3.innerHTML = headerObj.hadero;//a cellaban a headerObj hadero tulajdonsaganak lesz megjelenitve az erteke
+headerCell3.innerHTML = array[0].hadero;//a cellaban az array 0.tagjanak a hadero tulajdonsaganak az erteke lesz megjelenitve 
 headerRow.appendChild(headerCell3);//a headerRow-hoz (fejléc sorához) adom hozzá
 
 //Itt hozzuk létre a táblázat törzsét
@@ -92,18 +89,18 @@ tbody.appendChild(tbodyRow1);//hozzaadom a tbody-hoz
 
 //A sor első cellájának létrehozása
 const tbodyRow1Cell1 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow1Cell1.innerHTML = firstRowElement.harcMegnevezese;//a cellaban a firstRowElement harcMegnevezese tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow1Cell1.innerHTML = array[1].harcMegnevezese;//a cellaban az array 1.tagjanak a harcMegnevezese tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow1.appendChild(tbodyRow1Cell1);//hozzáadja az első sorhoz
 tbodyRow1Cell1.rowSpan = "2"//Itt adjuk meg hogy hány sort egyesítsen 
 
 //A sor második cellájának létrehozása
 const tbodyRow1Cell2 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow1Cell2.innerHTML = firstRowElement.szembenalloFelek1;//a cellaban a firstRowElement szembenalloFelek1 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow1Cell2.innerHTML = array[1].szembenalloFelek1;//a cellaban az array 1.tagjanak a szembenalloFelek1 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow1.appendChild(tbodyRow1Cell2);//hozzáadjuk a cellát a sorhoz 
 
 //A sor harmadik cellájának létrehozása
 const tbodyRow1Cell3 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow1Cell3.innerHTML = firstRowElement.hadero1;//a cellaban a firstRowElement hadero1 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow1Cell3.innerHTML = array[1].hadero1;//a cellaban az array 1.tagjanak a hadero1 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow1.appendChild(tbodyRow1Cell3);//hozzáadjuk a cellát a sorhoz 
 
 //Új sor létrehozása
@@ -112,12 +109,12 @@ tbody.appendChild(tbodyRow2);//hozzáadjuk a sort a tbodyhoz (törzsünkhöz)
 
 //A sor első cellájának létrehozása
 const tbodyRow2Cell1 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow2Cell1.innerHTML = firstRowElement.szembenalloFelek2;//a cellaban a firstRowElement szembenalloFelek2 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow2Cell1.innerHTML = array[1].szembenalloFelek2;//a cellaban az array 1.tagjanak a szembenalloFelek2 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow2.appendChild(tbodyRow2Cell1);//hozzáadjuk a cellát a sorhoz 
 
 //A sor második cellájának létrehozása
 const tbodyRow2Cell2 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow2Cell2.innerHTML = firstRowElement.hadero2;//a cellaban a firstRowElement hadero2 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow2Cell2.innerHTML = array[1].hadero2;//a cellaban az array 1.tagjanak a hadero2 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow2.appendChild(tbodyRow2Cell2);//hozzáadjuk a cellát a sorhoz 
 
 //új sort hozunk létre
@@ -126,29 +123,29 @@ tbody.appendChild(tbodyRow3);//hozzáadjuk a sort a törzsönkhüz
 
 //A sor első cellájának létrehozása
 const tbodyRow3Cell1 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow3Cell1.innerHTML = secondRowElement.harcMegnevezese;//a cellaban a secondRowElement harcMegnevezese tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow3Cell1.innerHTML = array[2].harcMegnevezese;//a cellaban az array 2.tagjanak a harcMegnevezese tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow3.appendChild(tbodyRow3Cell1);//hozzáadjuk a cellát a sorhoz 
 tbodyRow3Cell1.rowSpan = "2";
 
 //A sor második cellájának létrehozása
 const tbodyRow3Cell2 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow3Cell2.innerHTML = secondRowElement.szembenalloFelek1;//a cellaban a secondRowElement szembenalloFelek1 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow3Cell2.innerHTML = array[2].szembenalloFelek1;//a cellaban az array 2.tagjanak a szembenalloFelek1 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow3.appendChild(tbodyRow3Cell2);//hozzáadjuk a cellát a sorhoz 
 
 //A sor harmadik cellájának létrehozása
 const tbodyRow3Cell3 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow3Cell3.innerHTML = secondRowElement.hadero1;//a cellaban a secondRowElement hadero1 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow3Cell3.innerHTML = array[2].hadero1;//a cellaban az array 2.tagjanak a hadero1 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow3.appendChild(tbodyRow3Cell3);//hozzáadjuk a cellát a sorhoz 
 
 const tbodyRow4 = document.createElement('tr');//itt egy uj sort adok hozza egy tr elemet
 tbody.appendChild(tbodyRow4);//hozzáadjuk a sort a törzsönkhöz
 
 const tbodyRow4Cell1 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow4Cell1.innerHTML = secondRowElement.szembenalloFelek2;//a cellaban a heasecondRowElementderObj szembenalloFelek2 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow4Cell1.innerHTML = array[2].szembenalloFelek2;//a cellaban az array 2.tagjanak a szembenalloFelek2 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow4.appendChild(tbodyRow4Cell1);//hozzáadjuk a cellát a sorhoz 
 
 const tbodyRow4Cell2 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow4Cell2.innerHTML = secondRowElement.hadero2;//a cellaban a secondRowElement hadero2 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow4Cell2.innerHTML = array[2].hadero2;//a cellaban az array 2.tagjanak a hadero2 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow4.appendChild(tbodyRow4Cell2);//hozzáadjuk a cellát a sorhoz 
 
 //új sor létrehozása
@@ -157,18 +154,18 @@ tbody.appendChild(tbodyRow5);//hozzáadjuk a sort a törzsönkhöz
 
 //A sor első cellájának létrehozása rowspannal
 const tbodyRow5Cell1 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow5Cell1.innerHTML = thirdRowElement.harcMegnevezese;//a cellaban a thirdRowElement harcMegnevezese tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow5Cell1.innerHTML = array[3].harcMegnevezese;//a cellaban az array 3.tagjanak a harcMegnevezese tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow5.appendChild(tbodyRow5Cell1);//hozzáadjuk a cellát a sorhoz 
 tbodyRow5Cell1.rowSpan = "2";//Itt adjuk meg hogy hány sort egyesítsen
 
 //A sor második cellájának létrehozása
 const tbodyRow5Cell2 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow5Cell2.innerHTML = thirdRowElement.szembenalloFelek1;//a cellaban a thirdRowElement szembenalloFelek1 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow5Cell2.innerHTML = array[3].szembenalloFelek1;//a cellaban az array 3.tagjanak a szembenalloFelek1 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow5.appendChild(tbodyRow5Cell2);//hozzáadjuk a cellát a sorhoz 
 
 //A sor harmadik cellájának létrehozása
 const tbodyRow5Cell3 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow5Cell3.innerHTML = thirdRowElement.hadero1;//a cellaban a thirdRowElement hadero1 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow5Cell3.innerHTML = array[3].hadero1;//a cellaban az array 3.tagjanak a hadero1 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow5.appendChild(tbodyRow5Cell3);//hozzáadjuk a cellát a sorhoz 
 
 //új sor létrehozása
@@ -177,12 +174,12 @@ tbody.appendChild(tbodyRow6);//hozzáadjuk a sort a törzsönkhüz
 
 //A sor első cellájának létrehozása
 const tbodyRow6Cell1 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow6Cell1.innerHTML = thirdRowElement.szembenalloFelek2;//a cellaban a thirdRowElement szembenalloFelek2 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow6Cell1.innerHTML = array[3].szembenalloFelek2;//a cellaban az array 3.tagjanak a szembenalloFelek2 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow6.appendChild(tbodyRow6Cell1);//hozzáadjuk a cellát a sorhoz 
 
 //A sor második cellájának létrehozása
 const tbodyRow6Cell2 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow6Cell2.innerHTML = thirdRowElement.hadero2;//a cellaban a thirdRowElement hadero2 tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow6Cell2.innerHTML = array[3].hadero2;//a cellaban az array 3.tagjanak a hadero2 tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow6.appendChild(tbodyRow6Cell2);//hozzáadjuk a cellát a sorhoz 
 
 //új sor létrehozása
@@ -191,15 +188,15 @@ tbody.appendChild(tbodyRow7);//hozzáadjuk a sort a törzsönkhüz
 
 //A sor első cellájának létrehozása rowspannal
 const tbodyRow7Cell1 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow7Cell1.innerHTML = fourthRowElement.harcMegnevezese;//a cellaban a fourthRowElement harcMegnevezese tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow7Cell1.innerHTML = array[4].harcMegnevezese;//a cellaban az array 4.tagjanak a harcMegnevezese tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow7.appendChild(tbodyRow7Cell1);//hozzáadjuk a cellát a sorhoz 
 
 //A sor második cellájának létrehozása
 const tbodyRow7Cell2 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow7Cell2.innerHTML = fourthRowElement.szembenalloFelek;//a cellaban a fourthRowElement szembenalloFelek tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow7Cell2.innerHTML = array[4].szembenalloFelek;//a cellaban az array 4.tagjanak a szembenalloFelek tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow7.appendChild(tbodyRow7Cell2);//hozzáadjuk a cellát a sorhoz 
 
 ////A sor harmadik cellájának létrehozása
 const tbodyRow7Cell3 = document.createElement('td');//letrehozok egy td elemet
-tbodyRow7Cell3.innerHTML = fourthRowElement.hadero;//a cellaban a fourthRowElement hadero tulajdonsaganak lesz megjelenitve az erteke
+tbodyRow7Cell3.innerHTML = array[4].hadero;//a cellaban az array 4.tagjanak a hadero tulajdonsaganak az erteke lesz megjelenitve 
 tbodyRow7.appendChild(tbodyRow7Cell3);//hozzáadjuk a cellát a sorhoz 
