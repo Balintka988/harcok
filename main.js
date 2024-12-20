@@ -122,3 +122,33 @@ function renderTable(){//itt definiálom a renderTable függvényemet
 }
 
 renderTable();//a rendeTable függvényt itt hívom meg
+
+
+const form = document.getElementById('form');//elékrem az index.html-ből a formomnak az id-ját
+
+form.addEventListener('submit', function(e) {//amikor submitolunk (amikor rányomunk a gombra)akkor hívódik meg ez a függvény és egy új sort tudunk hozzáadni a táblázatunkhoz
+    e.preventDefault(); //megakadalyozza hogy a bongeszo alapertelmezetten fusson le
+    const harc_nevHtmlElement = document.getElementById('harc_nev');//elkerem azt a htmlelementet aminek az harc_nev az id-ja
+    const harcolo1HtmlElement = document.getElementById('harcolo1');//elkerem azt a htmlelementet aminek az harcolo1 az id-ja
+    const hadero1HtmlElement = document.getElementById('hadero1');//elkerem azt a htmlelementet aminek az hadero1 az id-ja
+    const harcolo2HtmlElement = document.getElementById('harcolo2');//elkerem azt a htmlelementet aminek az harcolo2 az id-ja
+    const hadero2HtmlElement = document.getElementById('hadero2');//elkerem azt a htmlelementet aminek az hadero2 az id-ja
+
+    const harc_nevValue = harc_nevHtmlElement.value;//az harc_nevHtmlElement értékét beleteszem egy változóba
+    const harcolo1Value = harcolo1HtmlElement.value;//az harcolo1HtmlElement értékét beleteszem egy változóba
+    const hadero1Value = hadero1HtmlElement.value;//az hadero1HtmlElement értékét beleteszem egy változóba
+    const harcolo2Value = harcolo2HtmlElement.value === '' ? undefined : harcolo2HtmlElement.value;//ha az harcolo2HtmlElement nincsen semmi akkor undefined lesz ha viszont ez nem igaz akkor ugyanúgy eltároljuk az értékét
+    const hadero2Value = hadero2HtmlElement.value === '' ? undefined : hadero2HtmlElement.value;//ha az hadero2HtmlElement nincsen semmi akkor undefined lesz ha viszont ez nem igaz akkor ugyanúgy eltároljuk az értékét
+
+    const newElement = {//itt hozok létre egy új objektumot amit később majd hozzáadunk az array-ünkhöz
+        harcMegnevezese: harc_nevValue,//az harcMegnevezese erteke az harc_nevValue lesz
+        szembenalloFelek1: harcolo1Value,//az szembenalloFelek1 erteke az harcolo1Value lesz
+        hadero1: hadero1Value,//az hadero1 erteke az hadero1Value lesz
+        szembenalloFelek2: harcolo2Value,//az szembenalloFelek2 erteke az harcolo2Value lesz
+        hadero2: hadero2Value//az hadero2 erteke az hadero2Value lesz
+    };
+
+    array.push(newElement);//itt adjuk hozzá az array-hez a new elementet(az új objektumunk) amit fentebb hoztunk létre
+    tbody.innerHTML = ''; //a meglevo tablazat aktualis tartalmat itt töröljük
+    renderTable(); //itt hivjuk meg a renderTable függvényünket ami az új adatokkal együtt fog kirenderelődni
+});
