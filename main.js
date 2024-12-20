@@ -106,7 +106,7 @@ if(currentElement.szembenalloFelek2 !== undefined && currentElement.hadero2 !== 
 
 //második sor létrehozása
 const tbodyRow2 = document.createElement('tr');//létrehozok egy tr elemet ami az első sor lesz a tablazatban
-tbody.appendChild(tbodyRow2);//ha ugye már id
+tbody.appendChild(tbodyRow2);//hozzaadom a tbody-hoz  
 
 harcMegnevezes.rowSpan = "2"//Ha idáig lefutott a kódunk akkor biztosan szükség lesz soregyesítés és azt pedig itt adjuk meg
 
