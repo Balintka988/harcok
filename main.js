@@ -134,21 +134,57 @@ form.addEventListener('submit', function(e) {//amikor submitolunk (amikor rányo
     const harcolo2HtmlElement = document.getElementById('harcolo2');//elkerem azt a htmlelementet aminek az harcolo2 az id-ja
     const hadero2HtmlElement = document.getElementById('hadero2');//elkerem azt a htmlelementet aminek az hadero2 az id-ja
 
+    const thisForm = e.currentTarget;//az e.currentTarget tartalmazza a formunkat amit eltarolunk egy valtozoban
+    const errorElements = thisForm.querySelectorAll('.error');//az összes olyan elemet elkérjük ami error classal rendelkezik
+    for (const errorElement of errorElements){//itt végigiterálunk az imént bekért error classos elemeken ami az errorElements
+        errorElement.innerHTML = "";//kitöröljük azt az elemet ami benne van
+    }
+
+    let valid = true;//itt megadjuk a valid változónak kezdőérték ként hogy true ezt majd a későbbiekben fogjuk változtatni
+
     const harc_nevValue = harc_nevHtmlElement.value;//az harc_nevHtmlElement értékét beleteszem egy változóba
     const harcolo1Value = harcolo1HtmlElement.value;//az harcolo1HtmlElement értékét beleteszem egy változóba
     const hadero1Value = hadero1HtmlElement.value;//az hadero1HtmlElement értékét beleteszem egy változóba
     const harcolo2Value = harcolo2HtmlElement.value === '' ? undefined : harcolo2HtmlElement.value;//ha az harcolo2HtmlElement nincsen semmi akkor undefined lesz ha viszont ez nem igaz akkor ugyanúgy eltároljuk az értékét
     const hadero2Value = hadero2HtmlElement.value === '' ? undefined : hadero2HtmlElement.value;//ha az hadero2HtmlElement nincsen semmi akkor undefined lesz ha viszont ez nem igaz akkor ugyanúgy eltároljuk az értékét
 
-    const newElement = {//itt hozok létre egy új objektumot amit később majd hozzáadunk az array-ünkhöz
-        harcMegnevezese: harc_nevValue,//az harcMegnevezese erteke az harc_nevValue lesz
-        szembenalloFelek1: harcolo1Value,//az szembenalloFelek1 erteke az harcolo1Value lesz
-        hadero1: hadero1Value,//az hadero1 erteke az hadero1Value lesz
-        szembenalloFelek2: harcolo2Value,//az szembenalloFelek2 erteke az harcolo2Value lesz
-        hadero2: hadero2Value//az hadero2 erteke az hadero2Value lesz
-    };
+    if(harc_nevValue === ""){//ellenőrizzük hogy a harc nevének input mezője üres-e
+        const parentElement = harc_nevHtmlElement.parentElement;//megkeressük a harc_nev input mezőjének parentElement tulajdonságát és ezt eltároljuk egy változóba 
+        const errorPlace = parentElement.querySelector('.error');//a harc_nev szuloelemeben keresünk egy olyan elemet ami rendelkezik az error classal
+        if(errorPlace !== undefined){//ha van ilyen hely ahova majd tudja rakni a hibaüzenetet és nem undefined akkor:
+            errorPlace.innerHTML = "Meg kell adnod a Harc nevét";//megadjuk neki manuálisan a hiaüzenetet (stringet) és itt is iratjuk ki
+        }
+        valid = false;//a valid változónkat false-ra állítjuk ezáltal nem adódik majd a táblázatunkhoz új sor
+    }
+    if(harcolo1Value === ""){//ellenőrizzük hogy a harc nevének input mezője üres-e
+        const parentElement = harcolo1HtmlElement.parentElement;//megkeressük a harc_nev input mezőjének parentElement tulajdonságát és ezt eltároljuk egy változóba 
+        const errorPlace = parentElement.querySelector('.error');//a harc_nev szuloelemeben keresünk egy olyan elemet ami rendelkezik az error classal
+        if(errorPlace !== undefined){//ha van ilyen hely ahova majd tudja rakni a hibaüzenetet és nem undefined akkor:
+            errorPlace.innerHTML = "Meg kell adnod az egyik harcoló fél nevét";//megadjuk neki manuálisan a hiaüzenetet (stringet) és itt is iratjuk ki
+        }
+        valid = false;//a valid változónkat false-ra állítjuk ezáltal nem adódik majd a táblázatunkhoz új sor
+    }
+    if(hadero1Value === ""){//ellenőrizzük hogy a harc nevének input mezője üres-e
+        const parentElement = hadero1HtmlElement.parentElement;//megkeressük a harc_nev input mezőjének parentElement tulajdonságát és ezt eltároljuk egy változóba 
+        const errorPlace = parentElement.querySelector('.error');//a harc_nev szuloelemeben keresünk egy olyan elemet ami rendelkezik az error classal
+        if(errorPlace !== undefined){//ha van ilyen hely ahova majd tudja rakni a hibaüzenetet és nem undefined akkor:
+            errorPlace.innerHTML = "Meg kell adnod a haderő számát";//megadjuk neki manuálisan a hiaüzenetet (stringet) és itt is iratjuk ki
+        }
+        valid = false;//a valid változónkat false-ra állítjuk ezáltal nem adódik majd a táblázatunkhoz új sor
+    }
+
+    if(valid){
+        const newElement = {//itt hozok létre egy új objektumot amit később majd hozzáadunk az array-ünkhöz
+            harcMegnevezese: harc_nevValue,//az harcMegnevezese erteke az harc_nevValue lesz
+            szembenalloFelek1: harcolo1Value,//az szembenalloFelek1 erteke az harcolo1Value lesz
+            hadero1: hadero1Value,//az hadero1 erteke az hadero1Value lesz
+            szembenalloFelek2: harcolo2Value,//az szembenalloFelek2 erteke az harcolo2Value lesz
+            hadero2: hadero2Value//az hadero2 erteke az hadero2Value lesz
+        };
 
     array.push(newElement);//itt adjuk hozzá az array-hez a new elementet(az új objektumunk) amit fentebb hoztunk létre
     tbody.innerHTML = ''; //a meglevo tablazat aktualis tartalmat itt töröljük
     renderTable(); //itt hivjuk meg a renderTable függvényünket ami az új adatokkal együtt fog kirenderelődni
+    thisForm.reset();//a beviteli mezők értékét itt állítjuk alapértelmezettre
+    }
 });
