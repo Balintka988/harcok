@@ -84,9 +84,7 @@ const tbody = document.createElement('tbody');//létrehozok egy tbody elemet
 table.appendChild(tbody);//hozzáadjuk a tbody-t a table-hez
 
 
-//ez még nem elágazásos módszer szóval minden esetben le fog kreálódni nekünk egy rowspanos sor még akkor is ha csak egy szembenallo fel van meg csak egy hadero
-for(let i = 0; i < array.length; i++){//itt iterálunk végig az array tömbünkön egy növekményes ciklussal
-const currentElement = array[i];//az aktuális tömb elemét eltárolom a currentElement változóban később majd ezzel fogok dolgozni
+for(const currentElement of array){//itt a ciklusunk végigiterál az array tömbünk elemein és a currentElement lesz az aktuális elem
 
 //sor létrehozása
 const tbodyRow = document.createElement('tr');//létrehozok egy tr elemet ami az első sor lesz a tablazatban
@@ -95,7 +93,6 @@ tbody.appendChild(tbodyRow);//hozzaadom a tbody-hoz
 const harcMegnevezes = document.createElement('td');//letrehozok egy td elemet
 harcMegnevezes.innerHTML = currentElement.harcMegnevezese;//az aktuális elem (currentElement) harcMegnevezese tulajdonságának értéke lesz itt megjelenítve 
 tbodyRow.appendChild(harcMegnevezes);//hozzáadja az első sorhoz
-harcMegnevezes.rowSpan = "2"//Itt adjuk meg hogy hány sort egyesítsen 
 
 const szembenalloFelek1 = document.createElement('td');//letrehozok egy td elemet
 szembenalloFelek1.innerHTML = currentElement.szembenalloFelek1;//az aktuális elem (currentElement) szembenalloFelek1 tulajdonságának értéke lesz itt megjelenítve 
@@ -105,9 +102,13 @@ const hadero1 = document.createElement('td');//letrehozok egy td elemet
 hadero1.innerHTML = currentElement.hadero1;//az aktuális elem (currentElement) hadero1 tulajdonságának értéke lesz itt megjelenítve 
 tbodyRow.appendChild(hadero1);//hozzáadjuk a cellát a sorhoz 
 
+if(currentElement.szembenalloFelek2 !== undefined && currentElement.hadero2 !== undefined){//itt ellenőrizzük azt hogy az aktuális szembealloFelek2 és a hadero2 nem egyenlő-e undefineddel, és ha egyik sem az, csak akkor fut le tovább a kód
+
 //második sor létrehozása
 const tbodyRow2 = document.createElement('tr');//létrehozok egy tr elemet ami az első sor lesz a tablazatban
-tbody.appendChild(tbodyRow2);//hozzaadom a tbody-hoz  
+tbody.appendChild(tbodyRow2);//ha ugye már id
+
+harcMegnevezes.rowSpan = "2"//Ha idáig lefutott a kódunk akkor biztosan szükség lesz soregyesítés és azt pedig itt adjuk meg
 
 const szembenalloFelek2 = document.createElement('td');//letrehozok egy td elemet
 szembenalloFelek2.innerHTML = currentElement.szembenalloFelek2;//az aktuális elem (currentElement) szembenalloFelek2 tulajdonságának értéke lesz itt megjelenítve 
@@ -116,6 +117,7 @@ tbodyRow2.appendChild(szembenalloFelek2);//hozzáadja a második sorhoz
 const hadero2 = document.createElement('td');//letrehozok egy td elemet
 hadero2.innerHTML = currentElement.hadero2;//az aktuális elem (currentElement) hadero2 tulajdonságának értéke lesz itt megjelenítve 
 tbodyRow2.appendChild(hadero2);//hozzáadja a második sorhoz
+}
 }
 
 
