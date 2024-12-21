@@ -157,22 +157,10 @@ form.addEventListener('submit', function(e) {//amikor submitolunk (amikor rányo
     if(!simpleValidation(hadero1HtmlElement, "Meg kell adnod a haderő számát")){//itt adunk a simpleValidation függvényünknek bemeneti értéket, és ha a függvény hamis értékkel tér vissza a bemeneti hadero1HtmlElement esetén
         valid = false;//akkor a valid változót hamisra állítjuk
     }
-    if(harcolo2HtmlElement.value === '' && hadero2HtmlElement.value !== ''){//ez az elágazás csak akkor fut le hogyha a harcolo2 mező üres és az hadero2 meg nem
-        const parentElement = harcolo2HtmlElement.parentElement;//megkeressük az éppen aktuális htmlelementnek a parentElement propertyét és ezt eltároljuk egy változóba
-        const errorLocation = parentElement.querySelector('.error');//a harcolo2HtmlElement beviteli mezőjének parentElementjében keresünk egy olyan elemet amely rendelkezik az "error" osztállyal
-        if (errorLocation != undefined){//hogyha van ilyen mező(van ilyen htmlelement) (nem undefined) akkor
-            errorLocation.innerHTML = "Add meg a második harcoló felet";//megadjuk neki itt a hibaüzenetünket manuálisan (stringet adunk át)
-        }
-        valid = false;//a valid változó értékét hamisra állítjuk
-    };
-    if(hadero2HtmlElement.value === '' && harcolo2HtmlElement.value !== ''){//ez az elágazás csak akkor fut le hogyha a hadero2 mező üres és a harcolo2 meg nem
-            const parentElement = hadero2HtmlElement.parentElement;//megkeressük az éppen aktuális htmlelementnek a parentElement propertyét és ezt eltároljuk egy változóba
-            const errorLocation = parentElement.querySelector('.error');//a hadero2HtmlElement beviteli mezőjének parentElementjében keresünk egy olyan elemet amely rendelkezik az "error" osztállyal
-            if (errorLocation != undefined){//hogyha van ilyen mező(van ilyen htmlelement) (nem undefined) akkor
-                errorLocation.innerHTML = "Add meg a második haderőnek a létszámát";//megadjuk neki itt a hibaüzenetünket manuálisan (stringet adunk át)
-            }
-            valid = false;//a valid változó értékét hamisra állítjuk
-    };
+    if(!complexValidation(harcolo2HtmlElement, hadero2HtmlElement, "Add meg a második szembenálló felet", "Add meg a második haderő számát")){//itt adunk a complexValidation függvényünknek bemeneti értéket, és ha a függvény hamis értékkel tér vissza a bemeneti paramétereink esetén:
+        valid = false;//akkor a valid változót hamisra állítjuk
+    }
+    
 
     if(valid){//ha a valid változónk true maradt a validáció során akkor fut le
         const newElement = {//itt hozok létre egy új objektumot amit később majd hozzáadunk az array-ünkhöz
@@ -200,6 +188,27 @@ function simpleValidation(htmlElement, errormessage){//itt adjuk meg a simpleVal
         }
         valid = false;//a valid változónkat false-ra állítjuk 
     }
+    return valid;//visszatértünk a valid változónk értékével (bool)
+}
+
+function complexValidation(inputHarcField2, inputhaderoField2, errormessage1, errormessage2){//itt hozzuk létre az új függvényünket és itt adjuk meg hogy milyen bemeneti paramétereket vár, kettő htmlelementet és kettő stringet
+    let valid = true;//valid változónak true érték adása
+    if(inputHarcField2.value === '' && inputhaderoField2.value !== ''){//ez az elágazás csak akkor fut le hogyha a harcolo2 mező üres és az hadero2 meg nem
+        const parentElement = inputHarcField2.parentElement;//megkeressük az éppen aktuális htmlelementnek a parentElement propertyét és ezt eltároljuk egy változóba
+        const errorLocation = parentElement.querySelector('.error');//a harcolo2HtmlElement beviteli mezőjének parentElementjében keresünk egy olyan elemet amely rendelkezik az "error" osztállyal
+        if (errorLocation != undefined){//hogyha van ilyen mező(van ilyen htmlelement) (nem undefined) akkor
+            errorLocation.innerHTML = errormessage1;//megadjuk neki a bemeneti paraméerünkből az első (errormessage1) hiaüzenetet (stringet) és itt is iratjuk ki
+        }
+        valid = false;//a valid változó értékét hamisra állítjuk
+    };
+    if(inputhaderoField2.value === '' && inputHarcField2.value !== ''){//ez az elágazás csak akkor fut le hogyha a hadero2 mező üres és a harcolo2 meg nem
+        const parentElement = inputhaderoField2.parentElement;//megkeressük az éppen aktuális htmlelementnek a parentElement propertyét és ezt eltároljuk egy változóba
+        const errorLocation = parentElement.querySelector('.error');//a hadero2HtmlElement beviteli mezőjének parentElementjében keresünk egy olyan elemet amely rendelkezik az "error" osztállyal
+        if (errorLocation != undefined){//hogyha van ilyen mező(van ilyen htmlelement) (nem undefined) akkor
+            errorLocation.innerHTML = errormessage2;//megadjuk neki a bemeneti paraméerünkből a második (errormessage2) hiaüzenetet (stringet) és itt is iratjuk ki
+        }
+        valid = false;//a valid változó értékét hamisra állítjuk
+    };
     return valid;//visszatértünk a valid változónk értékével (bool)
 }
     
