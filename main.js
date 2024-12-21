@@ -148,32 +148,17 @@ form.addEventListener('submit', function(e) {//amikor submitolunk (amikor rányo
     const harcolo2Value = harcolo2HtmlElement.value === '' ? undefined : harcolo2HtmlElement.value;//ha az harcolo2HtmlElement nincsen semmi akkor undefined lesz ha viszont ez nem igaz akkor ugyanúgy eltároljuk az értékét
     const hadero2Value = hadero2HtmlElement.value === '' ? undefined : hadero2HtmlElement.value;//ha az hadero2HtmlElement nincsen semmi akkor undefined lesz ha viszont ez nem igaz akkor ugyanúgy eltároljuk az értékét
 
-    if(harc_nevValue === ""){//ellenőrizzük hogy a harc nevének input mezője üres-e
-        const parentElement = harc_nevHtmlElement.parentElement;//megkeressük a harc_nev input mezőjének parentElement tulajdonságát és ezt eltároljuk egy változóba 
-        const errorPlace = parentElement.querySelector('.error');//a harc_nev szuloelemeben keresünk egy olyan elemet ami rendelkezik az error classal
-        if(errorPlace !== undefined){//ha van ilyen hely ahova majd tudja rakni a hibaüzenetet és nem undefined akkor:
-            errorPlace.innerHTML = "Meg kell adnod a Harc nevét";//megadjuk neki manuálisan a hiaüzenetet (stringet) és itt is iratjuk ki
-        }
-        valid = false;//a valid változónkat false-ra állítjuk ezáltal nem adódik majd a táblázatunkhoz új sor
+    if(!simpleValidation(harc_nevHtmlElement, "Meg kell adnod a harc nevét!")){//itt adunk a simpleValidation függvényünknek bemeneti értéket, és ha a simpleValidation függvény hamis értékkel tér vissza a bemeneti harc_nevHtmlElement esetén
+        valid = false;//akkor a valid változót hamisra állítjuk
     }
-    if(harcolo1Value === ""){//ellenőrizzük hogy a harc nevének input mezője üres-e
-        const parentElement = harcolo1HtmlElement.parentElement;//megkeressük a harc_nev input mezőjének parentElement tulajdonságát és ezt eltároljuk egy változóba 
-        const errorPlace = parentElement.querySelector('.error');//a harc_nev szuloelemeben keresünk egy olyan elemet ami rendelkezik az error classal
-        if(errorPlace !== undefined){//ha van ilyen hely ahova majd tudja rakni a hibaüzenetet és nem undefined akkor:
-            errorPlace.innerHTML = "Meg kell adnod az egyik harcoló fél nevét";//megadjuk neki manuálisan a hiaüzenetet (stringet) és itt is iratjuk ki
-        }
-        valid = false;//a valid változónkat false-ra állítjuk ezáltal nem adódik majd a táblázatunkhoz új sor
+    if(!simpleValidation(harcolo1HtmlElement, "Meg kell az egyik szemben álló felet")){//itt adunk a simpleValidation függvényünknek bemeneti értéket, és ha a függvény hamis értékkel tér vissza a bemeneti harcolo1HtmlElement esetén
+        valid = false;//akkor a valid változót hamisra állítjuk
     }
-    if(hadero1Value === ""){//ellenőrizzük hogy a harc nevének input mezője üres-e
-        const parentElement = hadero1HtmlElement.parentElement;//megkeressük a harc_nev input mezőjének parentElement tulajdonságát és ezt eltároljuk egy változóba 
-        const errorPlace = parentElement.querySelector('.error');//a harc_nev szuloelemeben keresünk egy olyan elemet ami rendelkezik az error classal
-        if(errorPlace !== undefined){//ha van ilyen hely ahova majd tudja rakni a hibaüzenetet és nem undefined akkor:
-            errorPlace.innerHTML = "Meg kell adnod a haderő számát";//megadjuk neki manuálisan a hiaüzenetet (stringet) és itt is iratjuk ki
-        }
-        valid = false;//a valid változónkat false-ra állítjuk ezáltal nem adódik majd a táblázatunkhoz új sor
+    if(!simpleValidation(hadero1HtmlElement, "Meg kell adnod a haderő számát")){//itt adunk a simpleValidation függvényünknek bemeneti értéket, és ha a függvény hamis értékkel tér vissza a bemeneti hadero1HtmlElement esetén
+        valid = false;//akkor a valid változót hamisra állítjuk
     }
 
-    if(valid){
+    if(valid){//ha a valid változónk true maradt a validáció során akkor fut le
         const newElement = {//itt hozok létre egy új objektumot amit később majd hozzáadunk az array-ünkhöz
             harcMegnevezese: harc_nevValue,//az harcMegnevezese erteke az harc_nevValue lesz
             szembenalloFelek1: harcolo1Value,//az szembenalloFelek1 erteke az harcolo1Value lesz
@@ -188,3 +173,17 @@ form.addEventListener('submit', function(e) {//amikor submitolunk (amikor rányo
     thisForm.reset();//a beviteli mezők értékét itt állítjuk alapértelmezettre
     }
 });
+
+function simpleValidation(htmlElement, errormessage){//itt adjuk meg a simpleValidation függvényünknek hogy milyen bemeneti elemet(htmlelement) és hibaüzenetet (string)varunk
+    let valid = true;//a valid változónknak true értéket adunk
+    if(htmlElement.value === ''){//abban az esetben fut le ha  a bemeneti elem(htmlelement) értéke üres
+        const parentElement = htmlElement.parentElement;//megkeressük az aktuális htmlelementnek az input mezőjének parentElement tulajdonságát és ezt eltároljuk egy változóba 
+        const errorPlace = parentElement.querySelector('.error');//az aktuális htmlel elem szuloelemeben keresünk egy olyan elemet ami rendelkezik az error classal
+        if(errorPlace !== undefined){//ha van ilyen hely ahova majd tudja rakni a hibaüzenetet és nem undefined akkor:
+            errorPlace.innerHTML = errormessage;//megadjuk neki a bemeneti paraméerünkből a hiaüzenetet (stringet) és itt is iratjuk ki
+        }
+        valid = false;//a valid változónkat false-ra állítjuk 
+    }
+    return valid;//visszatértünk a valid változónk értékével (bool)
+}
+    
