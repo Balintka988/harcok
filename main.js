@@ -26,11 +26,6 @@ const array = [//itt hozom létre az array tömböt minden értékadásnál egy 
         hadero1: "15.000" //haderő
     }
 ];
-const header = {//itt hozok létre egy objetumot a táblázatunk fejlécének
-    harcMegnevezese: "Harc megnevezése", //fejléc mezője a harc megnevezésére
-    szembenalloFelek: "Szembenálló felek", //fejléc mezője a szembenálló felekhez
-    hadero: "Haderő" // fejléc mezője a haderőhöz
-}
 
 
 //Itt hozzuk létre a táblázatot
@@ -60,28 +55,24 @@ colgroup.appendChild(col3);//a colgrouphoz adom hozzá
 const thead = document.createElement('thead');//thead elem letrehozasa itt tortenik ez lesz a fejlec
 table.appendChild(thead);//hozzáadom a tablehez
 
-//Létrehozunk egy sort a fejlécnek
-const headerRow = document.createElement('tr');//itt hozok létre egy tr elemet 
-thead.appendChild(headerRow);//hozzadaom a theadre
-
-//Az első cella létrehozása a fejléc sorában
-const headerCell = document.createElement('th');//itt egy th elemet hozok letre
-headerCell.innerHTML = header.harcMegnevezese;//a cellaban a header objektum harcMegnevezese tulajdonsaganak az erteket iratjuk ki
-headerRow.appendChild(headerCell);//a headerRow-hoz (fejléc sorához) adom hozzá
-
-//A második cella létrehozása a fejléc sorában
-const headerCell2 = document.createElement('th');//itt egy th elemet hozok letre
-headerCell2.innerHTML = header.szembenalloFelek;//a cellaban a header objektum szembenalloFelek tulajdonsaganak az erteket iratjuk ki
-headerRow.appendChild(headerCell2);//a headerRow-hoz (fejléc sorához) adom hozzá
-
-//A harmadik cella létrehozása a fejléc sorában
-const headerCell3 = document.createElement('th');//itt egy th elemet hozok letre
-headerCell3.innerHTML = header.hadero;//a cellaban a header objektum hadero tulajdonsaganak az erteket iratjuk ki
-headerRow.appendChild(headerCell3);//a headerRow-hoz (fejléc sorához) adom hozzá
-
 //Itt hozzuk létre a táblázat törzsét
 const tbody = document.createElement('tbody');//létrehozok egy tbody elemet
 table.appendChild(tbody);//hozzáadjuk a tbody-t a table-hez
+
+function createTableHeader(){//a függvény definiálása, a fejlécet itt generáljuk
+    const header = ["Harc megnevezése", "Szembenálló felek", "Haderő"]//itt definiálom a header tömöt
+
+    //Létrehozunk egy sort a fejlécnek
+    const headerRow = document.createElement('tr');//itt hozok létre egy tr elemet 
+    thead.appendChild(headerRow);//hozzadaom a theadre
+
+    for(let i = 0; i < header.length; i++){//egy for növekményes cilussal járom be a header tömb elemeit, itt nem kell semmiféle classt vagy ilyesmit adni neki a css-hez mert az nth child az tudja az elemek sorrendjét
+        const headerCell = document.createElement('th');//itt egy th elemet hozok letre
+        headerCell.innerHTML = header[i];//a cellaban a header tömb aktuális elemének az erteket iratjuk ki
+        headerRow.appendChild(headerCell);//a headerRow-hoz (fejléc sorához) adom hozzá
+    }
+}
+createTableHeader();//itt hívjuk meg a függvényünket
 
 function renderTable(){//itt definiálom a renderTable függvényemet
     for(const currentElement of array){//itt a ciklusunk végigiterál az array tömbünk elemein és a currentElement lesz az aktuális elem
@@ -161,7 +152,6 @@ form.addEventListener('submit', function(e) {//amikor submitolunk (amikor rányo
         valid = false;//akkor a valid változót hamisra állítjuk
     }
     
-
     if(valid){//ha a valid változónk true maradt a validáció során akkor fut le
         const newElement = {//itt hozok létre egy új objektumot amit később majd hozzáadunk az array-ünkhöz
             harcMegnevezese: harc_nevValue,//az harcMegnevezese erteke az harc_nevValue lesz
@@ -211,4 +201,3 @@ function complexValidation(inputHarcField2, inputhaderoField2, errormessage1, er
     };
     return valid;//visszatértünk a valid változónk értékével (bool)
 }
-    
